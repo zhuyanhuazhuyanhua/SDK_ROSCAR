@@ -1,5 +1,5 @@
 ## 一、环境配置
-Ubuntu20.04  ROS1-noetic
+***Ubuntu20.04  ROS1-noetic***
 
 ### 1.编译
 ##### 1.首先在一个合适的位置打开终端，执行命令
@@ -8,9 +8,9 @@ Ubuntu20.04  ROS1-noetic
 ```catkin_make```
 
 ### 2.运行launch
-#####  1.source工作空间环境(每次在新的终端窗户都要source一下)
+#####  1.source工作空间环境(每次在新的终端窗口都要source一下)
 ```source path/to/your/workspace/SDK_roscar/devel/setup.bash```
-  例如
+  **例如**
   ```source ~/SDK_roscar/devel/setup.bash```
 ##### 2.启动地图和机器人的gazebo
 ```roslaunch roscar roscar_gazebo.launch```
@@ -19,38 +19,57 @@ Ubuntu20.04  ROS1-noetic
 ##### 4.启动camera和imu的订阅节点
 ```roslaunch roscar camera_imu.launch```
 
-完毕
+### 完毕
 
-注：
-1.ros1大概的架构默认你一定了解的一些，所以这里并未细致地讲在哪个目录下
-2.可能会安装 Arbotix，Arbotix 是一款控制电机、舵机的控制板，并提供相应的 ros 功能包
+#### 注：
+##### 1.可能会需要安装 Arbotix，Arbotix 是一款控制电机、舵机的控制板，并提供相应的 ros 功能包
 ```sudo apt-get install ros-noetic-arbotix```
-3.可能会安装键盘控制机器人的ROS包
+##### 2.可能会需要安装键盘控制机器人的ROS包
 ```sudo apt install ros-noetic-teleop-twist-keyboard```
 
 ## 二、任务描述
 
-![alt text](1.png)
-该SDK耗时7天，从机器人xacro模型、世界gazebo模型到传感器的纯手搓ROS1小车仿真。由左右两个驱动轮、一个万向轮、一个2D激光雷达、一个普通单目摄像头、一个imu构成。
-![alt text](小车简图.png)
+该SDK制作耗时7天，从机器人xacro模型、世界gazebo模型到传感器的纯手搓ROS1小车仿真。由左右两个驱动轮、一个万向轮、一个2D激光雷达、一个普通单目摄像头、一个imu构成。
+<img src="小车简图.png" alt="alt text" width="400"/>
+<img src="1.png" alt="alt text" width="400"/>
 
-本次考核主要面对无人机的二维定点问题，随着光流技术日益成熟，电赛主办方更倾向于选择难以分辨的地面来干扰光流定点效果，雷达方案更加稳定。
-在室内定位中，以imu为主，同时雷达点云数据辅助融合。
+### 本次考核概述
 
-摄像头的camera_subscriber节点
-imu的imu_subscriber节点
-机器人接收/cmd_vel消息控制底盘的 线速度、角速度 来进行运动。
-摄像头帧率30，像素640*480
-雷达频率10，范围0.1m~10m，弧度-1~1
-imu频率100
+本次考核主要面对无人机的二维定点问题，随着光流技术日益成熟，电赛主办方更倾向于选择难以分辨的地面来干扰光流定点效果，而雷达方案则更加稳定。
 
-![alt text](橙蓝柱.png)
+在室内定位中，以 IMU 为主，同时雷达点云数据辅助融合。
+
+---
+
+#### 系统组件
+
+- **摄像头节点**：`camera_subscriber`
+- **IMU 节点**：`imu_subscriber`
+- **机器人控制**：接收 `/cmd_vel` 消息，控制底盘的线速度和角速度来进行运动。
+
+---
+
+#### 参数设置
+
+##### 摄像头
+- **帧率**：30 Hz
+- **分辨率**：640x480
+
+##### 雷达
+- **频率**：10 Hz
+- **测量范围**：0.1 m 至 10 m
+- **测量弧度**：-1 至 1 弧度
+
+##### IMU
+- **频率**：100 Hz
+
+
 ##### 任务一：键盘控制机器人平移与旋转，并运动至能够看到橙蓝柱子的位置
 
 1. 请用键盘发布 `/cmd_vel` 消息，控制机器人平移与旋转。
 2. 运动至能够看到橙蓝柱子的位置。
 3. 请简单录制并提交一个键盘控制视频。
-
+<img src="橙蓝柱.png" alt="alt text" width="400"/>
 ---
 
 ##### 任务二：使用 OpenCV 实时显示转化成 HSV 格式后的视频，并保存
