@@ -1,0 +1,47 @@
+<robot name="move" xmlns:xacro="http://wiki.ros.org/xacro">
+ 
+    <xacro:property name="base_width" value="0.2"/>
+    <xacro:property name="wheel_radius" value="0.0325"/>
+
+    <xacro:macro name="joint_trans" params="joint_name">
+        <!-- Transmission is important to link the joints and the controller -->
+        <transmission name="${joint_name}_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${joint_name}">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${joint_name}_motor">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    </xacro:macro>
+ 
+    <xacro:joint_trans joint_name="base_link2_left" />
+    <xacro:joint_trans joint_name="base_link2_right" />
+ 
+    <gazebo>
+        <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+            <rosDebugLevel>Debug</rosDebugLevel>
+            <publishWheelTF>false</publishWheelTF>
+            <robotNamespace>/</robotNamespace>
+            <publishTf>1</publishTf>
+            <publishWheelJointState>true</publishWheelJointState>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>100.0</updateRate>
+            <legacyMode>true</legacyMode>
+            <leftJoint>base_link2_left</leftJoint>
+            <rightJoint>base_link2_right</rightJoint>
+            <wheelSeparation>${base_width} </wheelSeparation>
+            <wheelDiameter>${wheel_radius * 2}</wheelDiameter>
+            <broadcastTF>1</broadcastTF>
+            <wheelTorque>30</wheelTorque>
+            <wheelAcceleration>1.8</wheelAcceleration>
+            <commandTopic>cmd_vel</commandTopic>
+            <odometryFrame>odom</odometryFrame>
+            <odometryTopic>odom</odometryTopic>
+            <robotBaseFrame>base_footprint</robotBaseFrame>
+        </plugin>
+    </gazebo>
+ 
+</robot>

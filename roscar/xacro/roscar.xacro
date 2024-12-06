@@ -1,0 +1,14 @@
+<robot name="roscar" xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <xacro:include filename="interial.xacro" />
+    
+    <xacro:include filename="body.xacro" />
+    <xacro:include filename="camera.xacro" />
+    <xacro:include filename="lidar.xacro" />
+    
+    <xacro:include filename="move.xacro" />
+    <xacro:include filename="sensor.xacro" />
+    <xacro:include filename="imu.xacro" />
+
+
+</robot>

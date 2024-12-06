@@ -1,0 +1,41 @@
+<robot name="imu" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:property name="imu_radius" value="0.015" />
+    <xacro:property name="imu_length" value="0.02" />
+    <xacro:property name="base_height" value="0.08"/>
+
+    <xacro:property name="imu_off_x" value="0.04" />
+    <xacro:property name="imu_off_y" value="0" />
+    <xacro:property name="imu_off_z" value="${ base_height/2 + imu_length/2 }" />
+
+    <link name="imu">
+        <visual>
+            <geometry>
+                <cylinder radius="${imu_radius}" length="${imu_length}" />
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <material name="imu_color" >
+                <color rgba="0.7 0 0.7 1" />
+            </material>
+        </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="${imu_radius}" length="${imu_length}" />
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        </collision>
+        <xacro:cylinder_inertial_matrix m="${0.15}" r="${imu_radius}" h="${imu_length}" />
+    </link>
+
+    <joint name="imu2support" type="fixed">
+        <parent link="base_link" />
+        <child link="imu" />
+        <origin xyz="${imu_off_x} ${imu_off_y} ${imu_off_z}" />
+    </joint>
+
+    <gazebo reference="imu">
+        <material>Gazebo/Purple</material>
+    </gazebo>
+
+</robot>

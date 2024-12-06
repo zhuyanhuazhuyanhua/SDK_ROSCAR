@@ -1,0 +1,6 @@
+<launch>
+  <node name="imu_subscriber" pkg="roscar" type="imu_subscriber" output="screen">
+  </node>
+  <node name="camera_subscriber" pkg="roscar" type="camera_subscriber" output="screen">
+  </node>
+</launch>
