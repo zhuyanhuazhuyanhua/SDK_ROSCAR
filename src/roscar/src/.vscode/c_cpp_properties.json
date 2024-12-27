@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/noetic/include/**",
+        "/home/zhuyanhua/catkin_ws/src/beginner_tutorials/include/**",
+        "/home/zhuyanhua/catkin_ws/src/camera_opencv/include/**",
+        "/home/zhuyanhua/catkin_ws/src/helloworld/include/**",
+        "/home/zhuyanhua/catkin_ws/src/my_cpp_package/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

@@ -20,6 +20,7 @@ find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   image_transport
   sensor_msgs
+  robot_localization
 )
 
 catkin_package()
@@ -30,7 +31,9 @@ include_directories(
 
 add_executable(camera_subscriber src/camera_subscriber.cpp)
 add_executable(imu_subscriber src/imu_subscriber.cpp)
-
+# 在其他add_executable下面添加
+add_executable(station src/station.cpp)
+target_link_libraries(station ${catkin_LIBRARIES})
 target_link_libraries(camera_subscriber 
                       ${catkin_LIBRARIES}
                       ${OpenCV_LIBRARIES}

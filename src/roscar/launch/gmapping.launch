@@ -1,0 +1,32 @@
+<launch>
+  <!-- 设置参数节点，配置GMapping参数 -->
+  <node name="gmapping" pkg="gmapping" type="slam_gmapping" output="screen">
+    <!-- 指定激光雷达的扫描话题 -->
+    <param name="scan_topic" value="scan"/>
+    
+    <!-- 指定里程计话题 -->
+    <param name="odom_topic" value="odom"/>
+    
+    <!-- 设置地图的分辨率 -->
+    <param name="map_update_interval" value="1"/>
+    
+    <!-- 设置粒子滤波器的粒子数 -->
+    <param name="particles" value="30"/>
+    
+    <!-- 设置地图的尺寸 -->
+    <param name="map_size" value="100"/>
+    
+    <!-- 设置最大范围 -->
+    <param name="maxRange" value="8.0"/>
+    
+    <!-- 设置传感器噪声参数 -->
+    <param name="sigma" value="0.05"/>
+    <param name="kernelSize" value="1"/>
+  </node>
+  
+  <!-- 启动地图服务器，用于保存和加载地图 -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find roscar)/maps/my_map.yaml" output="screen"/>
+  
+  <!-- 启动RViz，用于可视化SLAM结果 -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find roscar)/launch/gmapping.rviz" output="screen"/>
+</launch>

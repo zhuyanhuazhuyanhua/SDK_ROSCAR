@@ -1,0 +1,8 @@
+<!-- robot_localization.launch -->
+<launch>
+    <node name="ekf_localization_node" pkg="robot_localization" type="ekf_localization_node" output="screen">
+        <rosparam file="$(find roscar)/config/robot_localization.yaml" />
+        <param name="publish_tf" value="true" />
+        <param name="publish_tf_static" value="true" />
+    </node>
+</launch>

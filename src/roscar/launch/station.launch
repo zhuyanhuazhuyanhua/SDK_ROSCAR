@@ -1,0 +1,4 @@
+<!-- src/roscar/launch/station.launch -->
+<launch>
+    <node pkg="roscar" type="station" name="station" output="screen"/>
+</launch>

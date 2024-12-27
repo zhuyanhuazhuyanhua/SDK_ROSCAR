@@ -1,0 +1,2 @@
+roscar
+-DCATKIN_DEVEL_PREFIX=/home/zhuyanhua/桌面/SDK_roscar/devel -DCMAKE_INSTALL_PREFIX=/home/zhuyanhua/桌面/SDK_roscar/install -G Unix Makefiles
